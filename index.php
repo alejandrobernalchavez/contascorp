@@ -8,54 +8,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Estilos -->
-    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="diseño.css">
 </head>
 <body>
 
-<div class="container">
-
-    <!-- Logo -->
-    <div class="logo">🦂</div>
+<div class="wrapper">
+  <div class="container">
 
     <!-- Título -->
-    <h1>ContaScorp</h1>
-    <p class="subtitle">Calculadora de Sueldo Líquido</p>
+    <h1>CONTASCORP</h1>
 
     <!-- Formulario -->
     <form action="calcular.php" method="POST">
 
         <!-- Sueldo -->
-        <label for="sueldo">Sueldo Base ($)</label>
-        <input 
-            type="number" 
+        <label for="sueldo">Sueldo base</label>
+        <input
+            type="text"
             id="sueldo"
             name="sueldo"
-            step="0.01"
-            required 
-            placeholder="Ej: 600.00"
+            inputmode="numeric"
+            pattern="[0-9]+(\.[0-9]{1,2})?"
+            placeholder="Ej: 600"
+            required
         >
 
-        <!-- Periodo -->
-        <label for="periodo">Periodo de Pago</label>
-        <select id="periodo" name="periodo" required>
-            <option value="">Seleccione</option>
-            <option value="mensual">Mensual</option>
-            <option value="quincenal">Quincenal</option>
-            <option value="semanal">Semanal</option>
-        </select>
-
-        <!-- Botón -->
-        <button type="submit">
-            Calcular Sueldo
-        </button>
+        <!-- Pestañas / Periodo -->
+        <div class="tabs">
+            <button type="submit" name="periodo" value="mensual" class="tab active">
+                mensual
+            </button>
+            <button type="submit" name="periodo" value="quincenal" class="tab">
+                quincenal
+            </button>
+            <button type="submit" name="periodo" value="semanal" class="tab">
+                semanal
+            </button>
+        </div>
 
     </form>
 
-    <!-- Footer -->
-    <div class="footer">
-        © 2026 ContaScorp - Todos los derechos reservados
-    </div>
-
+  </div>
 </div>
 
 </body>
