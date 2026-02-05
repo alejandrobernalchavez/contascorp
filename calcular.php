@@ -10,14 +10,24 @@ if (!isset($_POST['sueldo']) || !isset($_POST['periodo'])) {
     exit();
 }
 
-$sueldo = floatval($_POST['sueldo']);
+$sueldo  = floatval($_POST['sueldo']);
 $periodo = $_POST['periodo'];
 
 // ===============================
 // DESCUENTOS FIJOS
 // ===============================
-$isss = $sueldo * 0.03;
-$afp  = $sueldo * 0.0725;
+
+// ISSS con tope
+if ($sueldo > 1000) {
+    $isss = 30;
+    $textoISSS = "ISSS (Tope $30)";
+} else {
+    $isss = $sueldo * 0.03;
+    $textoISSS = "ISSS (3%)";
+}
+
+// AFP
+$afp = $sueldo * 0.0725;
 
 // Sueldo después de ISSS y AFP
 $sueldoBaseISR = $sueldo - $isss - $afp;
@@ -25,9 +35,6 @@ $sueldoBaseISR = $sueldo - $isss - $afp;
 // ===============================
 // CALCULO ISR
 // ===============================
-$isr = 0;
-
-// Función ISR
 function calcularISR($sueldo, $periodo) {
 
     $isr = 0;
@@ -36,13 +43,10 @@ function calcularISR($sueldo, $periodo) {
 
         if ($sueldo <= 550) {
             $isr = 0;
-
         } elseif ($sueldo <= 895.24) {
             $isr = ($sueldo - 550) * 0.10 + 17.67;
-
         } elseif ($sueldo <= 2038.10) {
             $isr = ($sueldo - 895.24) * 0.20 + 60;
-
         } else {
             $isr = ($sueldo - 2038.10) * 0.30 + 288.57;
         }
@@ -51,13 +55,10 @@ function calcularISR($sueldo, $periodo) {
 
         if ($sueldo <= 275) {
             $isr = 0;
-
         } elseif ($sueldo <= 447.62) {
             $isr = ($sueldo - 275) * 0.10 + 8.83;
-
         } elseif ($sueldo <= 1019.05) {
             $isr = ($sueldo - 447.62) * 0.20 + 30;
-
         } else {
             $isr = ($sueldo - 1019.05) * 0.30 + 144.28;
         }
@@ -66,13 +67,10 @@ function calcularISR($sueldo, $periodo) {
 
         if ($sueldo <= 137.50) {
             $isr = 0;
-
         } elseif ($sueldo <= 223.81) {
             $isr = ($sueldo - 137.50) * 0.10 + 4.42;
-
         } elseif ($sueldo <= 509.52) {
             $isr = ($sueldo - 223.81) * 0.20 + 15;
-
         } else {
             $isr = ($sueldo - 509.52) * 0.30 + 72.14;
         }
@@ -96,9 +94,7 @@ $sueldoLiquido = $sueldo - $isss - $afp - $isr;
 <head>
     <meta charset="UTF-8">
     <title>Resultado - ContaScorp</title>
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
@@ -112,19 +108,19 @@ $sueldoLiquido = $sueldo - $isss - $afp - $isr;
 
     <div class="resultados">
 
-        <p><strong>Sueldo Base:</strong> $<?= number_format($sueldo,2) ?></p>
+        <p><strong>Sueldo Base:</strong> $<?= number_format($sueldo, 2) ?></p>
 
-        <p><strong>ISSS (3%):</strong> $<?= number_format($isss,2) ?></p>
+        <p><strong><?= $textoISSS ?>:</strong> $<?= number_format($isss, 2) ?></p>
 
-        <p><strong>AFP (7.25%):</strong> $<?= number_format($afp,2) ?></p>
+        <p><strong>AFP (7.25%):</strong> $<?= number_format($afp, 2) ?></p>
 
-        <p><strong>ISR:</strong> $<?= number_format($isr,2) ?></p>
+        <p><strong>ISR:</strong> $<?= number_format($isr, 2) ?></p>
 
         <hr>
 
-        <p><strong>Sueldo Líquido:</strong> 
+        <p><strong>Sueldo Líquido:</strong>
             <span style="color:green;font-size:18px;">
-                $<?= number_format($sueldoLiquido,2) ?>
+                $<?= number_format($sueldoLiquido, 2) ?>
             </span>
         </p>
 
