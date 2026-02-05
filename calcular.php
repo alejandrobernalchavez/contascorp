@@ -1,20 +1,52 @@
 <?php
 
-// Mostrar errores (solo para desarrollo)
+// Mostrar errores (solo desarrollo)
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
-// Validar datos
-if (!isset($_POST['sueldo']) || !isset($_POST['periodo'])) {
+// ===============================
+// VALIDAR ENVÍO
+// ===============================
+if (!isset($_POST['sueldo'], $_POST['periodo'])) {
     header("Location: index.php");
     exit();
 }
 
-$sueldo  = floatval($_POST['sueldo']);
+// ===============================
+// VALIDACIÓN ESTRICTA DEL SUELDO
+// ===============================
+$sueldoInput = trim($_POST['sueldo']);
+
+// ❌ No letras
+// ❌ No símbolos
+// ❌ No negativos
+// ❌ No puntos al inicio
+if (!preg_match('/^[0-9]+(\.[0-9]{1,2})?$/', $sueldoInput)) {
+    echo "<h2 style='color:red;text-align:center'>
+            Error: El sueldo solo debe contener números.
+          </h2>";
+    echo "<div style='text-align:center'>
+            <a href='index.php'>⬅ Volver</a>
+          </div>";
+    exit;
+}
+
+$sueldo = (float)$sueldoInput;
+
+if ($sueldo <= 0) {
+    echo "<h2 style='color:red;text-align:center'>
+            Error: El sueldo debe ser mayor a cero.
+          </h2>";
+    echo "<div style='text-align:center'>
+            <a href='index.php'>⬅ Volver</a>
+          </div>";
+    exit;
+}
+
 $periodo = $_POST['periodo'];
 
 // ===============================
-// DESCUENTOS FIJOS
+// DESCUENTOS
 // ===============================
 
 // ISSS con tope
@@ -29,17 +61,17 @@ if ($sueldo > 1000) {
 // AFP
 $afp = $sueldo * 0.0725;
 
-// Sueldo después de ISSS y AFP
+// Sueldo base para ISR
 $sueldoBaseISR = $sueldo - $isss - $afp;
 
 // ===============================
-// CALCULO ISR
+// FUNCIÓN ISR
 // ===============================
 function calcularISR($sueldo, $periodo) {
 
     $isr = 0;
 
-    if ($periodo == "mensual") {
+    if ($periodo === "mensual") {
 
         if ($sueldo <= 550) {
             $isr = 0;
@@ -51,7 +83,7 @@ function calcularISR($sueldo, $periodo) {
             $isr = ($sueldo - 2038.10) * 0.30 + 288.57;
         }
 
-    } elseif ($periodo == "quincenal") {
+    } elseif ($periodo === "quincenal") {
 
         if ($sueldo <= 275) {
             $isr = 0;
@@ -63,7 +95,7 @@ function calcularISR($sueldo, $periodo) {
             $isr = ($sueldo - 1019.05) * 0.30 + 144.28;
         }
 
-    } elseif ($periodo == "semanal") {
+    } elseif ($periodo === "semanal") {
 
         if ($sueldo <= 137.50) {
             $isr = 0;
@@ -79,12 +111,10 @@ function calcularISR($sueldo, $periodo) {
     return $isr;
 }
 
-// Calcular ISR
+// ===============================
+// CÁLCULO FINAL
+// ===============================
 $isr = calcularISR($sueldoBaseISR, $periodo);
-
-// ===============================
-// SUELDO LIQUIDO
-// ===============================
 $sueldoLiquido = $sueldo - $isss - $afp - $isr;
 
 ?>
