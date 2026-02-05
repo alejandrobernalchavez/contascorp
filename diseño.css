@@ -12,7 +12,7 @@
    FONDO GENERAL
 ================================ */
 body {
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    background: #2b2b2b;
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -20,135 +20,126 @@ body {
 }
 
 /* ================================
-   CONTENEDOR PRINCIPAL
+   MARCO AZUL EXTERNO
+================================ */
+.wrapper {
+    background: #155d7a;
+    padding: 25px;
+    border-radius: 12px;
+}
+
+/* ================================
+   PANEL GRIS INTERNO
 ================================ */
 .container {
-    background: #ffffff;
+    background: #bfbfbf;
     width: 100%;
-    max-width: 420px;
+    max-width: 500px;
     padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0px 10px 25px rgba(0,0,0,0.3);
+    border-radius: 8px;
     text-align: center;
 }
 
 /* ================================
-   LOGO
-================================ */
-.logo {
-    font-size: 50px;
-    margin-bottom: 10px;
-}
-
-/* ================================
-   TITULOS
+   TITULO
 ================================ */
 h1 {
-    color: #203a43;
-    margin-bottom: 5px;
-}
-
-.subtitle {
-    color: #666;
-    font-size: 14px;
-    margin-bottom: 20px;
+    color: #ffffff;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
 }
 
 /* ================================
    FORMULARIO
 ================================ */
 form {
-    text-align: left;
+    margin-bottom: 20px;
 }
 
 label {
-    font-weight: bold;
-    color: #203a43;
     display: block;
-    margin-bottom: 5px;
-    margin-top: 15px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #000;
 }
 
-input,
-select {
+input {
     width: 100%;
     padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 15px;
-}
-
-input:focus,
-select:focus {
-    outline: none;
-    border-color: #2c5364;
-    box-shadow: 0 0 5px rgba(44,83,100,0.5);
+    font-size: 16px;
+    margin-bottom: 15px;
+    border: 1px solid #333;
 }
 
 /* ================================
-   BOTONES
+   BOTÓN CALCULAR
 ================================ */
 button {
-    width: 100%;
-    margin-top: 20px;
-    padding: 12px;
-    background: #2c5364;
-    color: #fff;
+    padding: 10px 25px;
+    background: #8fd3f4;
+    border: 1px solid #333;
     font-size: 16px;
-    border: none;
-    border-radius: 8px;
+    font-weight: bold;
     cursor: pointer;
-    transition: 0.3s;
 }
 
 button:hover {
-    background: #203a43;
+    background: #6ec1e4;
 }
 
 /* ================================
-   RESULTADOS
+   PESTAÑAS
 ================================ */
-.resultados {
+.tabs {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.tab {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #333;
+    background: #ffffff;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: lowercase;
+}
+
+.tab.active {
+    background: #8fd3f4;
+}
+
+/* ================================
+   TABLA RESULTADOS
+================================ */
+.tabla-resultados {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+}
+
+.tabla-resultados th,
+.tabla-resultados td {
+    border: 1px solid #333;
+    padding: 10px;
+    font-size: 14px;
     text-align: left;
-    background: #f7f9fa;
-    padding: 15px;
-    border-radius: 10px;
-    border: 1px solid #ddd;
 }
 
-.resultados p {
-    margin: 8px 0;
-    font-size: 15px;
+.tabla-resultados th {
+    background: #e6e6e6;
 }
 
-.resultados hr {
-    margin: 10px 0;
+.total {
+    font-weight: bold;
+    color: green;
 }
 
 /* ================================
-   FOOTER
+   RESPONSIVE
 ================================ */
-.footer {
-    margin-top: 20px;
-    font-size: 12px;
-    color: #777;
-}
-
-/* ================================
-   RESPONSIVE (CELULAR)
-================================ */
-@media (max-width: 480px) {
-
+@media (max-width: 500px) {
     .container {
-        margin: 15px;
-        padding: 20px;
-    }
-
-    h1 {
-        font-size: 22px;
-    }
-
-    button {
-        font-size: 15px;
+        max-width: 100%;
     }
 }
