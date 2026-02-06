@@ -41,18 +41,19 @@ body {
 }
 
 /* ================================
-   LOGO
+   LOGO (ARREGLADO)
 ================================ */
 .logo-box {
     text-align: center;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
 }
 
 .logo {
-    width: 90px;
+    width: 85px;          /* tamaño principal */
+    max-width: 100%;      /* nunca se sale del contenedor */
     height: auto;
     display: block;
-    margin: 0 auto;
+    margin: 0 auto 6px auto;
 }
 
 /* ================================
@@ -60,7 +61,7 @@ body {
 ================================ */
 h1 {
     color: #ffffff;
-    margin-bottom: 22px;
+    margin-bottom: 16px;   /* menos espacio para que no empuje */
     letter-spacing: 1px;
     text-transform: uppercase;
 }
@@ -185,6 +186,6 @@ a {
     }
 
     .logo {
-        width: 110px;
+        width: 70px;
     }
 }
