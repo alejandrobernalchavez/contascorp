@@ -1,4 +1,4 @@
- <?php
+<?php
 if (!isset($_POST['sueldo'])) {
     header("Location: index.php");
     exit;
