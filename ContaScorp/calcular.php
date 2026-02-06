@@ -1,7 +1,4 @@
 <?php
-// ===============================
-// VALIDACIÓN
-// ===============================
 if (!isset($_POST['sueldo'])) {
     header("Location: index.php");
     exit;
@@ -18,57 +15,26 @@ if ($sueldo <= 0) {
     die("Sueldo inválido");
 }
 
-// ===============================
-// DESCUENTOS BASE
-// ===============================
+/* DESCUENTOS */
+$isss = ($sueldo > 1000) ? 30 : $sueldo * 0.03;
+$isssTxt = ($sueldo > 1000) ? "ISSS (Tope $30)" : "ISSS (3%)";
 
-// ISSS
-if ($sueldo > 1000) {
-    $isss = 30;
-    $isssTxt = "ISSS (Tope $30)";
-} else {
-    $isss = $sueldo * 0.03;
-    $isssTxt = "ISSS (3%)";
-}
-
-// AFP
 $afp = $sueldo * 0.0725;
-
-// Base ISR
 $baseISR = $sueldo - $isss - $afp;
 
-// ===============================
-// FUNCIÓN ISR OFICIAL
-// ===============================
+/* ISR */
 function calcularISR($sueldo, $periodo) {
-
     if ($periodo === "mensual") {
         if ($sueldo <= 550) return 0;
         if ($sueldo <= 895.24) return ($sueldo - 550) * 0.10 + 17.67;
-        if ($sueldo <= 2038.10) return ($sueldo - 895.24) * 0.20 + 60.00;
+        if ($sueldo <= 2038.10) return ($sueldo - 895.24) * 0.20 + 60;
         return ($sueldo - 2038.10) * 0.30 + 288.57;
     }
-
-    if ($periodo === "quincenal") {
-        if ($sueldo <= 275) return 0;
-        if ($sueldo <= 447.62) return ($sueldo - 275) * 0.10 + 8.83;
-        if ($sueldo <= 1019.05) return ($sueldo - 447.62) * 0.20 + 30.00;
-        return ($sueldo - 1019.05) * 0.30 + 144.28;
-    }
-
-    if ($periodo === "semanal") {
-        if ($sueldo <= 137.50) return 0;
-        if ($sueldo <= 223.81) return ($sueldo - 137.50) * 0.10 + 4.42;
-        if ($sueldo <= 509.52) return ($sueldo - 223.81) * 0.20 + 15.00;
-        return ($sueldo - 509.52) * 0.30 + 72.14;
-    }
-
+    if ($periodo === "quincenal") return calcularISR($sueldo * 2, "mensual") / 2;
+    if ($periodo === "semanal") return calcularISR($sueldo * 4, "mensual") / 4;
     return 0;
 }
 
-// ===============================
-// CÁLCULOS POR PERÍODO
-// ===============================
 $isrMensual   = calcularISR($baseISR, "mensual");
 $isrQuincenal = calcularISR($baseISR / 2, "quincenal");
 $isrSemanal   = calcularISR($baseISR / 4, "semanal");
@@ -77,14 +43,13 @@ $liqMensual   = $sueldo - $isss - $afp - $isrMensual;
 $liqQuincenal = ($sueldo / 2) - ($isss / 2) - ($afp / 2) - $isrQuincenal;
 $liqSemanal   = ($sueldo / 4) - ($isss / 4) - ($afp / 4) - $isrSemanal;
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Resultado - ContaScorp</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="diseño.css">
+    <meta charset="UTF-8">
+    <title>Resultado - ContaScorp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -100,7 +65,6 @@ $liqSemanal   = ($sueldo / 4) - ($isss / 4) - ($afp / 4) - $isrSemanal;
 </div>
 
 <table class="tabla-resultados">
-
 <tbody id="mensual">
 <tr><td>Sueldo base</td><td>$<?= number_format($sueldo,2) ?></td></tr>
 <tr><td><?= $isssTxt ?></td><td>$<?= number_format($isss,2) ?></td></tr>
@@ -110,15 +74,14 @@ $liqSemanal   = ($sueldo / 4) - ($isss / 4) - ($afp / 4) - $isrSemanal;
 </tbody>
 
 <tbody id="quincenal" style="display:none">
-<tr><td>ISR quincenal</td><td>$<?= number_format($isrQuincenal,2) ?></td></tr>
+<tr><td>ISR</td><td>$<?= number_format($isrQuincenal,2) ?></td></tr>
 <tr class="total"><td>Sueldo líquido quincenal</td><td>$<?= number_format($liqQuincenal,2) ?></td></tr>
 </tbody>
 
 <tbody id="semanal" style="display:none">
-<tr><td>ISR semanal</td><td>$<?= number_format($isrSemanal,2) ?></td></tr>
+<tr><td>ISR</td><td>$<?= number_format($isrSemanal,2) ?></td></tr>
 <tr class="total"><td>Sueldo líquido semanal</td><td>$<?= number_format($liqSemanal,2) ?></td></tr>
 </tbody>
-
 </table>
 
 <br>

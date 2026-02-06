@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Estilos -->
-    <link rel="stylesheet" href="diseño.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -32,7 +32,9 @@
                 inputmode="decimal"
                 pattern="[0-9]+(\.[0-9]{1,2})?"
                 title="Solo números. No letras, no símbolos."
-                oninput="this.value = this.value.replace(/[^0-9.]/g,'').replace(/^\.|(\..*)\./g,'$1')"
+                oninput="this.value = this.value
+                    .replace(/[^0-9.]/g,'')
+                    .replace(/^\.|(\..*)\./g,'$1')"
             >
 
             <!-- Botón Calcular -->
