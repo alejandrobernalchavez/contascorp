@@ -1,4 +1,4 @@
-/* ================================
+/* ================================ 
    RESET GENERAL
 ================================ */
 * {
@@ -38,6 +38,21 @@ body {
     padding: 25px;
     border-radius: 12px;
     text-align: center;
+}
+
+/* ================================
+   LOGO
+================================ */
+.logo-box {
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.logo {
+    width: 140px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
 }
 
 /* ================================
@@ -167,5 +182,9 @@ a {
 
     h1 {
         font-size: 20px;
+    }
+
+    .logo {
+        width: 110px;
     }
 }

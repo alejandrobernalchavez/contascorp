@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -14,6 +14,11 @@
 
 <div class="wrapper">
     <div class="container">
+
+        <!-- Logo -->
+        <div class="logo-box">
+            <img src="img/logo.png" alt="Logo ContasCorp" class="logo">
+        </div>
 
         <!-- Título -->
         <h1>CONTASCORP</h1>
