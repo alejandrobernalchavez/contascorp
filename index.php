@@ -19,7 +19,7 @@
         <h1>CONTASCORP</h1>
 
         <!-- Formulario -->
-        <form action="calcular.php" method="POST">
+        <form action="calcular.php" method="POST" autocomplete="off">
 
             <!-- Sueldo -->
             <label for="sueldo">Sueldo base ($)</label>
@@ -27,11 +27,12 @@
                 type="text"
                 id="sueldo"
                 name="sueldo"
+                placeholder="Ej: 600"
+                required
                 inputmode="decimal"
                 pattern="[0-9]+(\.[0-9]{1,2})?"
-                placeholder="Ej: 600"
-                title="Solo números, sin letras ni símbolos"
-                required
+                title="Solo números. No letras, no símbolos."
+                oninput="this.value = this.value.replace(/[^0-9.]/g,'').replace(/^\.|(\..*)\./g,'$1')"
             >
 
             <!-- Botón Calcular -->
