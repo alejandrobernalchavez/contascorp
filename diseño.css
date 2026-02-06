@@ -25,7 +25,7 @@ body {
 .wrapper {
     background: #155d7a;
     padding: 25px;
-    border-radius: 12px;
+    border-radius: 14px;
 }
 
 /* ================================
@@ -34,19 +34,20 @@ body {
 .container {
     background: #bfbfbf;
     width: 100%;
-    max-width: 500px;
+    max-width: 480px;
     padding: 25px;
     border-radius: 8px;
     text-align: center;
 }
 
 /* ================================
-   TITULO
+   TITULOS
 ================================ */
 h1 {
     color: #ffffff;
     margin-bottom: 25px;
     letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 /* ================================
@@ -61,21 +62,23 @@ label {
     font-weight: bold;
     margin-bottom: 8px;
     color: #000;
+    text-align: left;
 }
 
 input {
     width: 100%;
     padding: 10px;
     font-size: 16px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     border: 1px solid #333;
+    outline: none;
 }
 
 /* ================================
-   BOTÓN CALCULAR
+   BOTÓN CALCULAR / VOLVER
 ================================ */
 button {
-    padding: 10px 25px;
+    padding: 10px 30px;
     background: #8fd3f4;
     border: 1px solid #333;
     font-size: 16px;
@@ -88,7 +91,7 @@ button:hover {
 }
 
 /* ================================
-   PESTAÑAS
+   PESTAÑAS (PERIODO)
 ================================ */
 .tabs {
     display: flex;
@@ -103,6 +106,11 @@ button:hover {
     cursor: pointer;
     font-weight: bold;
     text-transform: lowercase;
+    user-select: none;
+}
+
+.tab:not(:last-child) {
+    border-right: none;
 }
 
 .tab.active {
@@ -130,9 +138,16 @@ button:hover {
     background: #e6e6e6;
 }
 
-.total {
+.total td {
     font-weight: bold;
     color: green;
+}
+
+/* ================================
+   ENLACES
+================================ */
+a {
+    text-decoration: none;
 }
 
 /* ================================
@@ -141,5 +156,13 @@ button:hover {
 @media (max-width: 500px) {
     .container {
         max-width: 100%;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    button {
+        width: 100%;
     }
 }
