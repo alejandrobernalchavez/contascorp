@@ -1,4 +1,4 @@
-<?php
+ <?php
 if (!isset($_POST['sueldo'])) {
     header("Location: index.php");
     exit;
@@ -78,7 +78,6 @@ $liqMensual   = $sueldo - $isss - $afp - $isrMensual;
 $liqQuincenal = ($sueldo / 2) - $isssQuincenal - $afpQuincenal - $isrQuincenal;
 $liqSemanal   = ($sueldo / 4) - $isssSemanal - $afpSemanal - $isrSemanal;
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -93,13 +92,6 @@ $liqSemanal   = ($sueldo / 4) - $isssSemanal - $afpSemanal - $isrSemanal;
 <div class="container">
 
 <h1>CONTASCORP</h1>
-
-<!-- LOGO ALACRÁN -->
-<div class="logo">
-    <svg viewBox="0 0 512 512" class="scorpion" xmlns="http://www.w3.org/2000/svg">
-        <path d="M256 40c-40 0-72 32-72 72v40c0 22-18 40-40 40s-40-18-40-40v-24c0-13-11-24-24-24s-24 11-24 24v24c0 48 40 88 88 88 18 0 32 14 32 32s-14 32-32 32H96c-26 0-48 22-48 48s22 48 48 48h64c35 0 64 29 64 64v24c0 13 11 24 24 24s24-11 24-24v-24c0-35 29-64 64-64h64c26 0 48-22 48-48s-22-48-48-48h-48c-18 0-32-14-32-32s14-32 32-32c48 0 88-40 88-88v-24c0-13-11-24-24-24s-24 11-24 24v24c0 22-18 40-40 40s-40-18-40-40v-40c0-40-32-72-72-72z"/>
-    </svg>
-</div>
 
 <div class="tabs">
     <div class="tab active" onclick="mostrar('mensual', this)">mensual</div>
