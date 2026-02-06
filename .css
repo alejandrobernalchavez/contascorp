@@ -36,12 +36,12 @@ body {
     width: 100%;
     max-width: 480px;
     padding: 25px;
-    border-radius: 8px;
+    border-radius: 10px;
     text-align: center;
 }
 
 /* ================================
-   TITULOS
+   TÍTULO
 ================================ */
 h1 {
     color: #ffffff;
@@ -54,7 +54,7 @@ h1 {
    FORMULARIO
 ================================ */
 form {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 label {
@@ -74,16 +74,22 @@ input {
     outline: none;
 }
 
+input:focus {
+    border-color: #155d7a;
+}
+
 /* ================================
-   BOTÓN CALCULAR / VOLVER
+   BOTONES
 ================================ */
 button {
-    padding: 10px 30px;
+    width: 100%;
+    padding: 12px;
     background: #8fd3f4;
     border: 1px solid #333;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
+    transition: background 0.2s ease;
 }
 
 button:hover {
@@ -124,6 +130,7 @@ button:hover {
     width: 100%;
     border-collapse: collapse;
     background: #ffffff;
+    margin-top: 15px;
 }
 
 .tabla-resultados th,
@@ -148,6 +155,8 @@ button:hover {
 ================================ */
 a {
     text-decoration: none;
+    font-weight: bold;
+    color: #000;
 }
 
 /* ================================
@@ -160,9 +169,5 @@ a {
 
     h1 {
         font-size: 20px;
-    }
-
-    button {
-        width: 100%;
     }
 }
